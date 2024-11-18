@@ -1,0 +1,36 @@
+---
+const { id } = Astro.params;
+import AuthorPill from "@/components/AuthorPill.astro";
+import ReadingSelect from "@/components/ReadingSelect.astro";
+import BaseLayout from "@/layout/BaseLayout.astro";
+import type { TBook } from "@/types/Books";
+import { db, Book, eq } from "astro:db";
+
+if (!id) {
+  return Astro.redirect("/");
+}
+
+const books = await db.select().from(Book).where(eq(Book.id, id));
+
+if (books.length === 0) {
+  return Astro.redirect("/");
+}
+
+const { author, cover, id: bookId, status, title } = books[0] as TBook;
+---
+
+<BaseLayout title={title}>
+  <div class="grid-md">
+    <div class="book-layout">
+      <img src={cover} alt={title} width="225" height="320" />
+      <div class="grid-sm">
+        <h1>{title}</h1>
+        <AuthorPill author={author} />
+        <ReadingSelect selectData={{ status, id: bookId }} />
+      </div>
+    </div>
+    <button class="remove-book-button btn warning" data-id={bookId}
+      >Remove from Library</button
+    >
+  </div>
+</BaseLayout>

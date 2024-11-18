@@ -308,6 +308,7 @@ nav div {
 
 .book-layout {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-md);
   align-items: center;
   img {
