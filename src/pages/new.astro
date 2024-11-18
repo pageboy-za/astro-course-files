@@ -66,3 +66,59 @@ import BaseLayout from "@/layout/BaseLayout.astro";
   </div>
   <ul id="new-book-list" class="book-card-list"></ul>
 </BaseLayout>
+
+<script>
+  import type { TBook } from "@/types/Books";
+
+  const newBookSearchForm = document.querySelector(
+    "#new-book-search-form"
+  ) as HTMLFormElement;
+  const newBookList = document.querySelector(
+    "#new-book-list"
+  ) as HTMLUListElement;
+
+  // helper functions
+  const renderBookCardHTML = (book: TBook) => `<li class="book-card">
+    <img src="${book.cover}" alt="${book.title}" loading="lazy" decoding="async" class="book-cover" />
+      <h2>${book.title}</h2>
+      <p>by ${new Intl.ListFormat().format(book.author)}</p>
+      <button class="add-book-checkbox btn" data-book=${encodeURIComponent(JSON.stringify(book))}>Add to Library</button>
+    </li>`;
+
+  // event listeners
+  newBookSearchForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (newBookSearchForm.hasAttribute("disabled")) {
+      return;
+    }
+
+    try {
+      const formData = new FormData(newBookSearchForm);
+      const search = formData.get("search") as string;
+      newBookSearchForm.setAttribute("disabled", "true");
+
+      // sanitize input
+      const res = await fetch(
+        `/api/books.json?search=${encodeURIComponent(search)}`
+      );
+
+      if (!res.ok) {
+        throw new Error("Unable to fetch books");
+      }
+
+      const { error, data } = await res.json();
+      if (error) {
+        throw new Error(error);
+      }
+
+      newBookList.innerHTML = data
+        .map((book: TBook) => renderBookCardHTML(book))
+        .join("");
+      newBookSearchForm.removeAttribute("disabled");
+    } catch (error) {
+      console.error(error);
+      newBookSearchForm.removeAttribute("disabled");
+      alert(error instanceof Error ? error.message : "Unknown error");
+    }
+  });
+</script>

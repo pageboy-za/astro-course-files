@@ -3,13 +3,22 @@ import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async ({ request }) => {
   // get query params
+  const query = new URL(request.url).searchParams.get("search");
 
   // return early if no params
+  if (!query) {
+    return new Response(
+      JSON.stringify({
+        data: [],
+        error: null,
+      })
+    );
+  }
 
   // query the API endpoint
   try {
     const res = await fetch(
-      "https://openlibrary.org/search.json?q=the+lord+of+the+rings&limit=6"
+      `https://openlibrary.org/search.json?q=${query}&limit=6`
     );
 
     if (!res.ok) {
