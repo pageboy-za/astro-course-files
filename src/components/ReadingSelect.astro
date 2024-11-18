@@ -17,3 +17,43 @@ const { status, id } = selectData;
     <option value="read" selected={status === "read"}>Read</option>
   </select>
 </div>
+
+<script>
+  const readingSelects = document.querySelectorAll(
+    ".reading-status-select"
+  ) as NodeListOf<HTMLSelectElement>;
+
+  readingSelects.forEach((select) => {
+    select.addEventListener("change", async (e) => {
+      try {
+        const res = await fetch(`/api/books/${select.dataset.id}.json`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            status: select.value,
+          }),
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to update status. Please try again");
+        }
+
+        const { data, error } = await res.json();
+
+        if (error) {
+          throw new Error(error);
+        }
+
+        // if on home, refresh
+        if (window.location.pathname === "/") {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error(error);
+        alert(error instanceof Error ? error.message : "Unknown error");
+      }
+    });
+  });
+</script>
