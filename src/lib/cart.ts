@@ -3,6 +3,7 @@ export type FinalCartItem = {
   product: CollectionEntry<"products">;
   quantity: number;
 };
+
 export const getTotalCartItems = async (
   cartItems: CollectionEntry<"products">["id"][]
 ) => {
