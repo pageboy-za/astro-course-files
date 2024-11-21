@@ -11,6 +11,10 @@ export default defineConfig({
     domains: ["files.stripe.com"],
   },
 
+  experimental: {
+    contentLayer: true,
+  },
+
   output: "server",
   adapter: vercel(),
   integrations: [icon()],
