@@ -1,4 +1,5 @@
 ---
+import { getProductPrice } from "@/lib/cart";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 
@@ -7,7 +8,8 @@ type Props = {
 };
 
 const { product } = Astro.props;
-console.log("🚀 ~ product:", product);
+
+const price = await getProductPrice(product);
 ---
 
 <li class="product-card grid-xs">
@@ -18,6 +20,6 @@ console.log("🚀 ~ product:", product);
     width={320}
   />
   <h2>{product.data.name}</h2>
-  <p>{"_PRICE_"}</p>
+  <p>{price}</p>
   <a href={`/product/${product.id}`} class="btn">View More</a>
 </li>
