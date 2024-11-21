@@ -332,9 +332,7 @@ nav div {
     outline: 2px var(--color-base);
   }
   &:focus-visible {
-    box-shadow:
-      0 0 0 4px var(--color-base),
-      0 0 0 8px var(--_local-border);
+    box-shadow: 0 0 0 4px var(--color-base), 0 0 0 8px var(--_local-border);
   }
   &.warning {
     --_local-bkg: var(--color-error);
@@ -385,6 +383,10 @@ nav div {
 
   & img {
     object-fit: cover;
+    padding: var(--space-sm);
+    border: 1px solid var(--color-muted);
+    background-color: var(--color-base);
+    border-radius: var(--rounded-sm);
   }
 
   .price {
