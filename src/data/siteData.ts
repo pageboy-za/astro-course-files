@@ -1,5 +1,5 @@
 export const baseData = {
-  title: "Bookends",
+  title: "Astro Pins",
   description:
-    "Bookends is a free and open source book reading tracking app.",
+    "We specialize in crafting unique, high-quality enamel pins that let you express your individuality and passions about Astro.",
 };

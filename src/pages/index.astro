@@ -1,68 +1,10 @@
 ---
-import { db, Book } from "astro:db";
-
-import BaseLayout from "@/layout/BaseLayout.astro";
-import BookCard from "@/components/BookCard.astro";
-import type { TBook } from "@/types/Books";
-
-const books = (await db.select().from(Book)) as TBook[];
-
-const booksByStatus = books.reduce(
-  (acc, book: TBook) => {
-    acc[book.status].push(book);
-    return acc;
-  },
-  {
-    reading: [],
-    to_read: [],
-    read: [],
-  } as Record<TBook["status"], TBook[]>
-);
+import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
-  <h1>Bookends Library</h1>
-
-  {
-    booksByStatus.reading.length > 0 && (
-      <section
-        class="book-list-section-wrapper"
-        aria-label="Books I'm current reading"
-      >
-        <h2>Currently Reading</h2>
-        <ul class="book-card-list">
-          {booksByStatus.reading.map((book) => (
-            <BookCard book={book} />
-          ))}
-        </ul>
-      </section>
-    )
-  }
-  {
-    booksByStatus.to_read.length > 0 && (
-      <section
-        class="book-list-section-wrapper"
-        aria-label="Books I want to read"
-      >
-        <h2>Want to Read</h2>
-        <ul class="book-card-list">
-          {booksByStatus.to_read.map((book) => (
-            <BookCard book={book} />
-          ))}
-        </ul>
-      </section>
-    )
-  }
-  {
-    booksByStatus.read.length > 0 && (
-      <section class="book-list-section-wrapper" aria-label="Books I've Read">
-        <h2>Books I've Read</h2>
-        <ul class="book-card-list">
-          {booksByStatus.read.map((book) => (
-            <BookCard book={book} />
-          ))}
-        </ul>
-      </section>
-    )
-  }
+  <h1>Astro Pin Products</h1>
+  <ul class="product-list">
+    <!-- PRODUCT LIST -->
+  </ul>
 </BaseLayout>

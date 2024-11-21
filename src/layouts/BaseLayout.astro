@@ -11,8 +11,12 @@ import "@/styles/global.css";
   <BaseHead {...Astro.props} />
   <body>
     <Nav />
-    <main class="container">
+    <main class={Astro.url.pathname !== "/checkout" ? "container" : ""}>
       <slot />
     </main>
   </body>
 </html>
+
+<script>
+  import "@/lib/global.ts";
+</script>
