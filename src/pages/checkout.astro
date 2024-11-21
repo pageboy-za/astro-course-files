@@ -46,3 +46,25 @@ const checkoutSession = await stripe.checkout.sessions.create({
   >
   </div>
 </BaseLayout>
+
+<script>
+  import { loadStripe } from "@stripe/stripe-js";
+
+  const checkoutContainer = document.querySelector(
+    "#checkout"
+  ) as HTMLDivElement;
+
+  const { clientSecret, stripeKey } = checkoutContainer.dataset;
+
+  if (!clientSecret || !stripeKey) {
+    throw new Error("Error loading checkout");
+  }
+
+  const stripe = await loadStripe(stripeKey);
+
+  const checkout = await stripe?.initEmbeddedCheckout({
+    fetchClientSecret: () => Promise.resolve(clientSecret),
+  });
+
+  checkout?.mount("#checkout");
+</script>
