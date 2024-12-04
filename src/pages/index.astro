@@ -1,10 +1,18 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import Card from "../components/Card.astro";
+import data from "../data/data.json";
 ---
 
-<BaseLayout title="Home">
-  <h1>Home</h1>
-  <p id="copyright">2000</p>
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {data.map((card) => <Card data={card} />)}
+  </body>
 
-<script is:inline></script>
+  <style></style>
+</html>
