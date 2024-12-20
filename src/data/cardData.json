@@ -64,27 +64,5 @@
         "checked": true
       }
     ]
-  },
-  {
-    "tier": "Uber Pro",
-    "most_popular": true,
-    "amount_per_month": "contact us",
-    "title": "For dev agencies",
-    "description": "Expand into a full web dev agency",
-    "btn_text": "Get started",
-    "features": [
-      {
-        "title": "10 new projects/month",
-        "checked": true
-      },
-      {
-        "title": "Advanced interactions",
-        "checked": true
-      },
-      {
-        "title": "Assets library",
-        "checked": true
-      }
-    ]
   }
 ]
