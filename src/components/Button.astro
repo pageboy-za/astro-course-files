@@ -1,0 +1,56 @@
+---
+import { type HTMLAttributes } from "astro/types";
+
+const buttonOptions = {
+  a: "a",
+  button: "button",
+};
+const buttonType = {
+  primary: "btn-primary",
+  secondary: "btn-secondary",
+  dark: "btn-dark",
+};
+
+interface Props extends HTMLAttributes<keyof typeof buttonOptions> {
+  tagName: keyof typeof buttonOptions;
+  href: string;
+  type?: "primary" | "secondary" | "dark";
+  classes?: string;
+}
+
+const { tagName, href, classes, type, ...rest } = Astro.props;
+const Tag = tagName;
+---
+
+<Tag {...rest} href={href} class:list={["default", buttonType[type], classes]}>
+  <slot />
+</Tag>
+
+<style>
+  .default {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: var(--color-primary);
+  }
+  .btn-primary {
+    background-color: var(--color-primary);
+  }
+  .btn-secondary {
+    background-color: var(--color-background);
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+  }
+  .btn-dark {
+    background-color: var(--color-background);
+    color: var(--color-primary);
+  }
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  r {
+    filter: brightness(0.9);
+  }
+</style>

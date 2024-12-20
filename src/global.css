@@ -1,0 +1,41 @@
+/* CSS Variables */
+:root {
+  --color-background: #f9f9f9;
+  --color-white: #ffffff;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-primary: #5a54e1;
+  --color-primary-hover: #4a45c5;
+  --color-secondary: #000000;
+  --color-secondary-hover: #ddd;
+  --color-gray-dark: #444;
+  --color-gray-medium: #777;
+  --color-gray-light: #eaeaea;
+  --color_dark-blue: #040a15;
+}
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+  background-color: var(--color-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Pricing Container */
+.pricing-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: stretch;
+  padding: 2rem;
+}

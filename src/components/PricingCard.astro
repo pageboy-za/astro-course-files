@@ -1,0 +1,179 @@
+---
+import Button from "./Button.astro";
+import Heading from "./Heading.astro";
+
+const {
+  tier,
+  most_popular,
+  amount_per_month,
+  title,
+  description,
+  btn_text,
+  features,
+} = Astro.props;
+
+const btnType = most_popular ? "primary" : "secondary";
+---
+
+<div class="pricing-card popular">
+  <Heading tagName="h3" size="h3" classes="plan-title">{tier}</Heading>
+  {most_popular && <div class="badge">MOST POPULAR</div>}
+  <p class="price"><span>$</span>{amount_per_month}<span>/mo</span></p>
+  <p class="plan-subtitle">{title}</p>
+  <p class="description">{description}</p>
+  <Button tagName="button" href="#" type={btnType}>{btn_text}</Button>
+  <ul class="features">
+    {
+      features.map((feature) => (
+        <li>
+          {feature.checked ? "✅" : "❌"} {feature.title}
+        </li>
+      ))
+    }
+    <!-- <li>✅ 6 new projects/month</li>
+    <li>✅ Basic interactions</li>
+    <li>❌ Assets library</li> -->
+  </ul>
+</div>
+
+<style>
+  /* Pricing Card */
+  .pricing-card {
+    background: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px var(--color-shadow);
+    text-align: center;
+    padding: 2rem 1.5rem;
+    max-width: 280px;
+    flex: 1;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  /* Hover Effect */
+  .pricing-card:hover {
+    transform: scale(1.05);
+  }
+
+  /* Popular Plan (Pro Plan) */
+  .popular {
+    border: 2px solid var(--color-primary);
+    position: relative;
+  }
+
+  /* Titles & Price */
+  .plan-title {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+  }
+
+  .price span {
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--color-gray-medium);
+  }
+
+  /* Subtitle and Description */
+  .plan-subtitle {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-gray-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    color: var(--color-gray-medium);
+    margin-bottom: 1rem;
+  }
+
+  /* Features */
+  .features {
+    list-style: none;
+    font-size: 0.85rem;
+    color: var(--color-gray-dark);
+    line-height: 1.8;
+    text-align: left;
+    margin: 0 auto;
+    max-width: 180px;
+  } /* Pricing Card */
+  .pricing-card {
+    background: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px var(--color-shadow);
+    text-align: center;
+    padding: 2rem 1.5rem;
+    max-width: 280px;
+    flex: 1;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  /* Hover Effect */
+  .pricing-card:hover {
+    transform: scale(1.05);
+  }
+
+  /* Popular Plan (Pro Plan) */
+  .popular {
+    border: 2px solid var(--color-primary);
+    position: relative;
+  }
+
+  .popular .badge {
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 5px;
+  }
+
+  /* Titles & Price */
+  .plan-title {
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+  }
+
+  .price span {
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--color-gray-medium);
+  }
+
+  /* Subtitle and Description */
+  .plan-subtitle {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-gray-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    color: var(--color-gray-medium);
+    margin-bottom: 1rem;
+  }
+
+  /* Features */
+  .features {
+    list-style: none;
+    font-size: 0.85rem;
+    color: var(--color-gray-dark);
+    line-height: 1.8;
+    text-align: left;
+    margin: 0 auto;
+    max-width: 180px;
+  }
+</style>
